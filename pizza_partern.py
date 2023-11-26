@@ -7,7 +7,7 @@ import pandas as df
 
 # Check previous candle is bearish or bullish
 def is_bearish_candle(candle):
-    return candle["Open"] > candle["Close"]
+    return float(candle["Open"]) > float(candle["Close"])
 
 
 # Detect bullish engulfing:
@@ -16,8 +16,8 @@ def is_bullish_engulfing(candle, index):
     current_day = candle[index]
     previous_day = candle[index - 1]
     if (is_bearish_candle(previous_day)
-            and current_day["Open"] < previous_day["Close"]
-            and current_day["Close"] > previous_day["Open"]):
+            and float(current_day["Open"]) < float(previous_day["Close"])
+            and float(current_day["Close"]) > float(previous_day["Open"])):
         return True
     return False
 
